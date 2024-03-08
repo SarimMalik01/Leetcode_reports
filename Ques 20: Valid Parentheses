@@ -1,0 +1,47 @@
+Ques:20
+Valid Parentheses
+
+Ist Wrong Approach :
+i)Converted string to Array using split function
+ii)then pushed every character into the Stack
+i.e : String s= "{(})]" => Stack ="[{(})"
+iii)then popped out every character and compared it with the character consecutive to it whether it is a opening bracket by giving conditions of if(stack.pop().equals("{") etc.)
+
+The hole in this approach is apparent and Diaphanous which is the consecutive brackets concept which might be untrue in many cases .
+
+
+IInd Wrong Approach
+i)Converted string to Array using split function
+ii)then pushed every character into the Stack
+i.e : String s= "{(})]" => Stack ="[{(})"
+iii) then popped out characters and tried to find a matching bracket by Searching Algorithm
+Searching Algorithm in Stack : 
+~ The index is intially initliased to -1.
+~ then Another temp stack is created and the elements of original Stack are pushed into it while consecutively checking with each iteration of while loop till the original stack doesn't get empty that the element(bracket) passed matches with the element peeked in the temp stack.
+~ the index is intialised to temp.length() if the element(bracket) passes matches with the element peeked in the temp stack.
+~ and then the break statement is encountered .
+~ then again the elements from temp stack are pushed inside the original stack .
+~ index is returned.
+iii)if the index is matched with -1 then false is returned.
+iv)Recursively the stack is checked if the Empty Stack is hit , then true is returned.
+
+The issue with this Approach is that the elements ain't checked sequentially .
+
+
+IIIrd Approach 
+i)Converted string to Array using split function
+ii)then pushed every character into the Stack
+i.e : String s= "{(})]" => Stack ="[{(})"
+iii)Filled the stack with opening brackets using iteration through loop
+iv) and if any closing bracket is encountered then the isEmpty() condition and isMatching() condition is checked .
+v) when the stack gets emptied then all the matching elements are implicitly checked and the loop gets executed .
+vi) isEmpty() function is checked on Stack , if the condition stays true then true is returned.
+
+
+Overall : 
+This was my first question of LeetCode Session in which I actively implemented Stacks&Queues.
+
+
+
+
+
