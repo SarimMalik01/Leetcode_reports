@@ -1,0 +1,15 @@
+Game of Stacks
+Approach 1:
+Recursively, I tried to implement the algorithm for finding the no. of counts upto the sum doesn't reach Max as I have already studied about the permutation and combination in the Algorithms so this idea came to my mind.
+The major drawback of this method is that the stack will get reduced with each recursive call and the popped elements can't be retrieved without complexing the Code.
+
+
+Appraoch 2:
+i)A sum variable is initially initialised to 0.
+ii)The sum is simultaneosuly added with the top elemnts of both the stacks usin peek to check for the smaller value of sum and then the smaller value is initlaised uing pop to sum , the count++ is exceuted with each iteration of while loop as the elements from the stack is popped everytime the while loop is executed.
+iii)this happens till the stacks don't get empty and the sum is less than the maxsum.
+
+
+
+Overall Review : This question for brain storming consumed many of my hours becoz I got stuck in first approach and later epiphined over a cup of soothing , cloyed and sizzzling tea that recursion might dig a loophole , but I will try the first approach after rectifying it later too.
+The second approach is Transparent and once the Recursion is thought for so many hours the similar code without recursion wasn't a labyrinth obscured from me.
