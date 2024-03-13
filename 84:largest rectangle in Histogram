@@ -2,7 +2,7 @@ Ques : 84
 largest rectangle in Histogram
 Approach : 1
 How it scintillated ? 
-The diagramtic analysis and the case in which I considered only one bar where I transversed left and right to find the maximum area it can form in the Histogram . Transversal => Looping , Nested loop => to evaluate the greatee bars on both sides , Both sides => Two loops one on right and one on left .
+The diagramtic analysis and the case in which I considered only one bar where I transversed left and right to find the maximum area it can form in the Histogram . Transversal => Looping , Nested loop => to evaluate the greatee bars on both sides , Both sides => Two loops one on right and one on left.
 
 
 i)The left and right variables are defined which keep a track the no of bars which are greater than the current element on left an right hand side of the current bar.
