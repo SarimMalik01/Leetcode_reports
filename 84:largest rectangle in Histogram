@@ -1,0 +1,50 @@
+Ques : 84
+largest rectangle in Histogram
+Approach : 1
+How it scintillated ? 
+The diagramtic analysis and the case in which I considered only one bar where I transversed left and right to find the maximum area it can form in the Histogram . Transversal => Looping , Nested loop => to evaluate the greatee bars on both sides , Both sides => Two loops one on right and one on left .
+
+
+i)The left and right variables are defined which keep a track the no of bars which are greater than the current element on left an right hand side of the current bar.
+ii) The left side of the Histogram is edged at when the current element shouldn't be first element and the right side at the last element.
+iii)Whenever a greater element at the left is encountered the left-- occurs such and on right side the right++ occurs .
+iv) The area is found by 
+ int area = (right - left +1) * heights[i];
+where +1 is due to the starting of indexes from 0.
+
+v) In each iteration of the bar , the area is choosen between the maximum area function.
+
+
+The issue with this code is its complexity which is O(n^2) .
+
+Approach : 2
+How it scintillated ?
+While transversing backwards from each of the Bar , We observe that the combination in which area is equal to it's index+1 . Such that the Maximum area can be found by the recursive calls as the same array(histogram) is sub-arrayed from one index greater than it in each call.
+Such a follow up would have been cumbersome and moreover there would have been n^2 calls (recursive) adding up to the complexity.
+
+
+Approach : 3
+How it scintillated ?
+I had to resort for Hints and then it was hinted at the usage of Stacks in solving this Question . Tbh I solved it partially and got stuck in the labyrinth of popping and pushing the Greater bars in the Stack .
+Therefore , the Approach might be similar to how many solve this question but what I learned from this one holds more significance .
+
+i)The empty stack is initally pushed in  with the 0 index .
+ii)Then by peeking at the bar in stack we check whether the element is smaller or greater than that in Histogram's current elt.
+iii) If the current element is smaller then , the Max area till the previous one of the current element is found 
+If the current element is greater than then , the Greater bar index is pushed on top of the Stack and current element is incremented by one.
+iv)The Max Area is found by
+Popping the element by heights[popped] where popped is the index of the top element and multiplying it with the (l - 1 - stack.peek()) . ie:
+ area = heights[popped] * (l - 1 - stack.peek());  if the stack isn't empty 
+
+if it's empty
+area=heights[popped] * l;
+
+v) Then the area is argumented in Math.Max function .
+
+
+Learned New : The involvement of Stacks in sequencing the Question's left and right like in Approach : 1 , Whenever the sequencing or the storage of past results has to be sorted for , Use Stacks 
+which allays the Space and Time Complexity .
+
+I looped watched this one animation to get a comprehensive understanding of how I'm supposed to work with stacks url(https://youtu.be/lktr76SxB2w?si=4MExLww9vI02KGfy).
+
+Overall : This question devoured my 4:30 hrs continously from the very beginning of glancing over this question to the moment of glaring at green lit Accepted in LeetCode . Eventually thought me a lot and ofc a pattern too .
