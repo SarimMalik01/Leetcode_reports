@@ -1,0 +1,14 @@
+Lowest Common Ancestor
+Approach :1
+i)This question seems to be primitve and of lower difficulty which it actually is as the implementation behind is a cake walk but the keen eye of frisking the logic out of this tree structure is what baffled me at the beginning.
+ii)The code I had written was skipping over the root so I was unable to pass thosw testcases in which the root was the lowest common ancestor as I was passing the root.left and root.right sperately for the calls to helper function and in most of the cases the root was the common ancestor.
+iii)Later after contemplating about this question , there are only two ways in which the common ancestor can be different than the root and those are :
+        ~)As the two nodes have been given and the node let's say p is found in left subtree and the recursion returns and q is not found in right subtree which just means 
+        that the q is present in left subtree below the p node . Vice Versa of above is also true for q being found in the right subtree but recursion in left subtree returns 
+        without p node.
+        ~)For the above mentioned case just return the found node whichever is found whether in the left or right subtree as that is the lowest common ancestor .
+        ~)If both the q and p nodes are found in right and left subtree resp. then the root is the Lowest Common Ancestor.
+
+iv)That is how I implemented this code without exhausting much of my time and still coming up with a robust solution.
+
+Overall : This was a pretty good question as it required some of my observation skills and little patience for evaluating the correct approach . The worst part and the most significant too is the cases which I thought of later .
