@@ -1,0 +1,16 @@
+Build a Tree using Inorder and Preorder traversal
+Approach :
+i)The first element of the preorder is always the root . Preorder traversal recites N->L->R . 
+ii)The left and right child of the first element is served in recursion calls by node.left & node.right , Inorder traversal recites L->N->R.
+iii) Index of the root element(first element of preorder ) is found by iterating through the array of inorder. A new Node is initialised.
+iv) The recursive calls for left of root is preorder array argumented from (1,index+1) coz the number of elements before Root node in inorder are left of node and those elements are also next to root node upto the index in preorder array. Inorder array is argumented from(0,index).
+v)The recursive calls for right of root is preorder array argumented from (index,preorder.length) and inorder array argumented from (index,inorder.length).
+vi)The node is returned.
+
+This Approach was hinted at me after looking up at the tutorials on Google as I was squandering away my time in solving it for the first time by applying and manipulating only one of the two given arrays (preorder & inorder) but eventually I realised that only one the array won't provide me with the position of null nodes and hence I read about it on Discussion Forum , googled , read some gfg and came up with this one . 
+Fortunately , it worked .
+
+
+
+
+
