@@ -1,0 +1,16 @@
+Flatten Binary tree to linked list
+(Really loved the part where it finally worked , a srsly great question)
+
+i)This question tempts one to think in many directions and implement an inefficient or blatantly wrong code , as I experienced firsthand too.
+ii)I got stuck as maybe I'm not yet acquainted to the tricks Leetcode some time throw's at you for being a clicky catchy with Keywords , I tried to attempt it by implementing an actual Linked List Data Structure for making nodes of the tree structure as I traverse through the tree recursively .
+iii) Kept wrapping my head for what went wrong with my approach , sought help from Discussion Forum .
+iv) I visualised it on paper using some rotation concept ( kind of ) from AVL Trees and what I found was the rightmost node of the left subtree has to be attached with the topmost rightnode next to root -> then the root has to be shifted to the left of the right subtree and it's left child must be intitalised to null . This whole process is looped until the node doesn't reach null.
+v) to find the rightmost node , begin from the root and check to it's root.left if it exists, move to it and traverse through the consecutive right children until null is reached.
+vi)Once the right most node is reached 
+rightmost.left=root.right;
+root.right=root.left;
+root.left=null
+the necessary rotation is done here.
+vii) to move to next iteration of loop move the root to the right node of it .
+
+Overall : This srsly taught me a lot as I was lost in striving to apply other D.S. and standard methods which I'm well familiar with as solved in previous questions . This rotational concept has come after a really long time in my stack of practise . Indeed , a revisable and important one.
