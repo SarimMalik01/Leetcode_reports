@@ -1,0 +1,17 @@
+Validate a BST
+A BST is the tree structure in which each and evry node on the left of a specific node is smaller in val and the one's on right are greater in val . 
+Approach : 1
+i)The above definition is what was engraved in my mind and it holds true also . I sought help of Stack data structure to sequence out the elements from left to right and push them into it .
+ii) Run a while loop until the stack is empty and whilst checking if the popped value is lesser than the peeked value if it is return false lest return true if the loop terminates. 
+Complexity of storing in stack and then iteratin through it are same O(n) , such complexity was ruining my simple yet effective approach so I moved to another spiral of thought of what exactly is neccessary & that is whether the left node's value is lesser than the current node value and the right node's value is greater than it .
+Such operation can be implemented by passing the current node's value in the next recursion call for checking the left and right node cases particularly.
+
+Approach :2 
+i) The initial value of two paramters(low and high) is argumented to null out of three parameters(node, low and high).
+ii)The first recursion call arguments the root.val as high in checking the left subtree and root.val as low in the right subtree and also the next node in left and right calls whilst storing the results of left and right calls in boolean .
+iii)Each recursion call checks whether the (current) node.val is more than the previous node.val (parent) in left calls and in right calls it checks whether the (current) node.val is less than the previous node.val(parent) , false is returned if that happens .
+iv)when current node becomes null true is returned.
+v) At the end left and right results are operated upon by AND operator.
+
+Overall : The first approach was maybe my brute force solution whicb I still fancy as the second approach is but just a segmented and more intricate version of the first one moreover first gave me the idea to proceed in second one as it's just comparison after all with the parent node's val . 
+It was a piecewise question for me and I only looked at the first root case and the last case for typing out code in recursion lest it becomes nasty and mind boggling to evaluate for so many cases .
