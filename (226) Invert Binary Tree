@@ -1,0 +1,23 @@
+Invert Binary Tree
+Before even beginning with this question what I had read about it on forum was a little backdrop history which recited that this question was asked to Sir Max Howell , the creator of HomeBrew in a Google interview and unfortunately he couldn't solve it in given time constraint for which he wasn't selected by the giant.
+Approach : 
+i) The above story hints at how difficult this question can be but it was far easier then what one expects from such a tale . 
+ii) The inversion and upon looking at some examples you get the idea of what to produce and what needs to be altered in the given tree structure.
+iii) The neccessary "inversion" gives you the idea of swapping 2 nodes by using three variables .
+Identifying the Core Operation which is inversion == swapping ,recognizing that the core operation in inverting a binary tree is swapping the left and right children of each node, I efficiently implemented this operation using three variables.
+iv) Then moving to the next node and calling upon the right and left subtree calls.
+v) null node is reached the function returns and the recursive calls start wrapping .
+vi) Exactly this trail of steps is what I followed and implemented what I saw in changed tree structure , gladly it worked.
+
+~Time Complexity :
+>Traversal of the Binary Tree:
+Time Complexity: O(n)
+Explanation: Traversing the binary tree to invert each node requires visiting each node once. Since there are n nodes in the binary tree, the time complexity of the traversal is O(n).
+>Swapping Children of Each Node:
+Time Complexity: O(1) per node
+Explanation: The operation of swapping the left and right children of a node requires a constant amount of time, regardless of the size of the binary tree. Therefore, the time complexity of this operation is O(1) per node.
+>Recursive Calls:
+Time Complexity: O(n)
+Explanation: Each node in the binary tree is visited exactly once during the recursive traversal. As a result, the time complexity of the recursive calls is O(n).
+
+Overall : The question wasn't overwhelming but the story surely was😊. This solution beats 100% users in time complexity and by far didn't require much of my time which I normally exhaust on LeetCode questions days if not hours . Surely I turn around and look at this question once in a while.
