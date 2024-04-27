@@ -1,0 +1,42 @@
+Symmetric Tree
+The "Symmetric Tree" title of the question is bit confusing and should've been more like the mirror of a tree as that infers the right and leftsubtree are mirror images of each other.
+Approach :1 
+i)The Symmetric Tree's example were quite hinting at how to traverse in the tree which is level by level obviously breadth First search .
+BFS(algorithm)
+while(!queue.isEmpty())
+{
+int levelsize=queue.size();
+for(int i=0;i<levelsize;i++)
+{
+Node node=queue.remove();
+if(node.left!=null)
+{
+queue.add(node.left);
+}
+if(node.right!=null)
+{
+queue.add(node.right);
+}
+}
+}
+ii)The Breadth First Search(BFS) gnawed my head and the Data Structure Queue popped out , to make some use of it.
+iii) What we do is to compare the node.val's and they are in a fashion where the leftmost node is equal to the rightmost node of tree.
+iv)So preserve the previous queue where it is filled with leftmost to rightmost nodes of tree and then another queue which is stuffed in reverse order that is rightmost to leftmost node of the tree.
+v)The queue's are iterated through and the comparison is held between the two queue's where their first elements are compared after popping and if anywhere the comparison doesn't hold true , false is returned.
+vi)That's how I figured out the crux of this question and queue implementation was hinted to me by the BFS traversal .
+
+~COMPLEXITIES :
+>Breadth First Search (BFS) Traversal:
+Time complexity: O(n)
+In the worst-case scenario, where every node needs to be visited once, the time complexity of BFS traversal is linear, proportional to the number of nodes in the tree (n).
+>Queue Operations:
+Enqueuing and dequeuing operations in a queue have constant time complexity, O(1), for each node.
+>Comparison of Nodes:
+Comparing corresponding nodes from both queues requires visiting each node once.
+In the worst-case scenario, all nodes need to be compared, resulting in a time complexity of O(n).
+Considering all these factors, the overall time complexity of my approach is O(n), where n is the number of nodes in the binary tree.
+
+>The space complexity of this approach is also O(n), as it requires additional space to store the nodes in the queue, which can grow linearly with the number of nodes in the tree.
+
+
+Overall : This problem is fundamnetal and should be revised for recapitulating the BFS traversal . It didn't take much time to figure out this question as the only difference relied in Reverse queue other than that it was all the same.
