@@ -1,0 +1,21 @@
+Path Sum
+The algorithm must keep a sum of traversal to the leaf nodes and then check whether the sum is equal to targetsum if it is return true.
+Approach 
+i) A generic question where the currentsum will be initially intialised to 0 and then the node.val will keep adding up until it reaches leaf of the tree .
+ii) Once the leaf is encountered , a condition(node.left==null && node.right==null) is checked if it is true then the return is currentsum==targetsum .
+iii)The recursive calls are on left and right combined together using OR binary operator (||).
+
+Idea:
+i)It's fair and unbiased question where what you have to do is given and how you are supposed to do it is the implementation.
+ii)The implementation is intutitive where the currentsum appears to be storing sum of the traversed node.val's.
+iii)The currentsum must be equal to the targetsum for the path traversed to be valid when the leaf node is met .
+iii)The concurrent checking must also be held in the right subtree similarly.
+iv)There can be multiple paths but atleast one must be present . So the left and right calls are operated by OR.
+(Left)    (right)  (left || right)
+true	   true	      true
+true	   false	    true
+false  	 true	      true
+false	   false	    false
+
+
+Overview : Relatively simple question which doesn't enquire much of energy and brain storming to come up with a solution but it was a good exercise anyhow afterall questions become easier once you get acquainted with the concepts and practise.😊
