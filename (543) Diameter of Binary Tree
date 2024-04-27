@@ -1,0 +1,21 @@
+Diameter of Binary Tree
+Approach :
+i)The Diameter of A binary tree is the maximum no. of edges between any nodes .
+ii) The maximum gives away the hint of keeping an account of previous results so the compare and update the next results effectively.
+iii) The height of the tree is obviously the no of edges from the node to the leaf and each node's height has to be evaluated by the algorithm:
+public int height(Node node)
+{
+if(node==null)
+{
+return 0;
+}
+int leftheight=height(node.left);
+int rightheight=height(node.right);
+
+return 1+Math.max(hl,hr);
+}
+iv)As mentioned the diameter is the maximum no. of edges between any two nodes in the right and left subtree infering that the height of the node in left summed up with height of tree in right has to be operated upon .
+v)Now what we need is to keep a track of the maximum between current and maximum Diameter so to do that we include another variable which sums up the left height and right height passing through the node on which recursive call is made and then compares it with the maxdiameter and updates the maxdia using Math.max() function.
+vi)The question indeed is a mind boggling one atleast for me it was when it dealt with the updation of the maxdia using this procedure of keeping a track of the previous sum of heights in the node's left and right subtree.
+
+OVERALL : The question taught me a lot , it really did in terms of preserving nd using the previous results from past recursive calls . I broke the examples given on LeetCode to a certain subtree which was 2->4->5 (preorder) the maxdia should be 2 and it is when the summation of the left and right subtree height is 2. That is when the comparison is not held and when the comparison are being held from bottom to top the moving upward will create more diameters and those have to be compared with previous so I broke the problem into these fragments and then solved it 
