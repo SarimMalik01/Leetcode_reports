@@ -1,0 +1,57 @@
+Serialise and Deserialise a Binary Tree
+Overview : From the Description of the question , this seemed to be some kind of conversion in bits and then retrieving the val of nodes from those bits just like how the LeetCode also processes the tree.Then after going throught the frame of Code Edior , I comprehended that it's returning String so the tree must be stringified.
+Approach:
+i)The traversal through tree has to be through the string given to the deserialise function but the problem which persists is that we always need atleast two traversal data to build a tree so to obtain the position of null nodes but how do we obtain that from a single string.
+ii)Then I understood that the position of those null nodes can be hinted with some kind of a char just like ',' '^' '*" etc.
+iii)The preorder traversal fills the string with the info of the tree nodes and also with the position of the null by '!'.
+     10
+    / \
+   2  30
+      / \
+     40   50
+the stringified expression will be -> 102!!3040!!50!!
+iv) The next deserialise function will decode it such that wherever it finds the null just return null from that call of node until then the character at 0 position is being filled into tree and the String recursively called upon is from index 1.
+**ERROR GENERATED**
+The deserialise function will now build an incorret tree as this approach is limited to only single digit node val's in this case the tree built is through logic that wherever the null is argumented return from there till then for each consecutive position , pour it into node val.
+The incorrect tree constructed will be:
+      1
+     / \
+    0   2
+       / \
+      3   0
+     / \
+    4   0
+       / \
+      5   0
+
+Approach :2
+i)The issue lies in not seperating the node val's so while stringifying the Binary Tree the string contains the node's val's but these are seperated using commas in each inorder traversal call the string adds node.val and ",".
+ii)The stringified tree will be sent to the deserialise function to decode .
+iii)The deserialise function keeps a track of it using a pointer (int i) where i keeps track of where the comma is present (to push the 1,2,3,4 etc digit values) , the data.substring(0,i) is filled in tree.
+iv)Now comes the part of recursive calls where I kept scribbling used the concepts of learnt from inorder and preorder traversal to build a tree . Evetnually I dumped this approach and sought a better method than keeping a track of the calls.
+
+Approach :3
+i)The stringified version was perfect and all it needs is an efficient deserialise function to decode.
+ii)The issue lies in keeping a track of the pointer to make successive recursive calls but that pointer is redundant .The comma helps in seperating the values but also becomes a problem once the deserialise function has to be invoked.
+iii) Tht infers that the comma can be eliminated once the string is built by converting string to array using split(",");
+
+    10
+    / \
+   2  30
+      / \
+     40   50
+the stringified expression will be -> "10,2,!,!,30,40,!,!,50,!,!,"
+The array will be ["10","2","!","!","30","40","!","!","50","!","!"]
+*********  TO ELIMINATE THE INDEXING PROBLEM WHILST RECURSIVE CALLS WE INCLUDE QUEUE  ******** and fill all the array elements in the queue
+(10) (2) (!) (!) (30) (40) (!) (!) (50) (!) (!)
+iv) Thus now the queue.remove() stores val which is converted to int while initialisation of Node and the node.left and node.right call is made without any pointer as the queue keeps emptying and when ! is reached null is returned to call.
+
+The efficiency of the code increases if we use StringBuilder rather than string to stringify the tree as it's faster .
+
+OverView : If you have reached this far while scrolling and reading . You must have understood how much time it must had taken me to come up with such solution after so many failed submissions and testcases . Needless to say this question engraved some keypoints in my head like :
+~ The indexing of the elements can be avoided and thus queue is implemented to argument in recursive calls as it keeps modifying.
+~ The Array can be directly converted to queue using 
+Queue<String> queue=new LinkedList<>(Array.asList(str));
+~ just one traversal of the tree can also be used to make a tree if that contains null pointers too .
+
+
