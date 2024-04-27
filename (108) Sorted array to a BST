@@ -1,0 +1,7 @@
+Convert Sorted Array to a BST
+Approach :
+The " sorted array " provided me hint with using the binary search algorithm for dividing the array by it's middle term till I reach only one element and the starting index  becomes >= ending index .The binary search algorithm to partition the sorted array recursively. At each step of the partitioning process, identify the middle element of the current subarray. This middle element becomes the root of the subtree being constructed. Then, recursively apply binary search to the left and right halves of the array to construct the left and right subtrees of the current root node .Each time the middle element is pushed into the tree by another insert function which checks whether the given value (mid) is lesser or smaller than the current node's value if it is smaller a recursive call to insert is made through left subtree otherwise from the right subtree.
+As the node reaches null the value of the node is initialised and returned to left or right subtree call.
+
+The form of algorithm I already familiar to in AVL Trees where one has to populate based on exactly this manner but the catch was from this array , if I had simply operated on array by traversing it lineraly the Time complexity would have been inefficient as O(N) so the Binary search algo popped up in my mind which has O(NlogN)
+Overall : This was a generic form of a question and helped me to uplift my basics of tree to much better understanding .
