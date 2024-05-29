@@ -1,0 +1,36 @@
+Rotting Oranges
+This is one of those questions which you need to revise even after solving by moving giant mountains or even it seemed to be a piece of cake. 
+Approach : 1
+DFS traversal which entirely was a bad idea to start with , I failed to notice the apparent oranges approaching their neighbours(immediate) which lead me to conclude that DFS traversal will indeed be handy , anyhow my code fell short of testcases and a tangled labyrinth of lines of code which eventually didn't work as intended. 
+
+Approach : 2
+BFS traversal which started off just correctly on the path as it was intended to approach it's neighbours first 4 directionally and adjacently thus seemed to be a lush green pond in parched desert . Analogically too a rotten orange will spread it's disease to other oranges in all 4 directions so to find out the time in which the oranges are about to rotten , you need to catch the rotten oranges first . Hence fill those rotten oranges co-ordinates in a queue and reach those rotten oranges first to traverse to other oranges. There were several issues like :
+i) Underestimation of Question
+Because of which I kept thinking of resorting to solve without using a class for Oranges which are indeed filled in queue without prop's like int row , int col , int time.
+
+ii) Instance variables
+row and col for each object of orange class , then int time is for counting the time in which the other fresh oranges are infected . The rotten oranges are filled in queue at time 0 hence their time variable is 0 and when a fresh orange in their adjacent direction is found the new infected orange has a time variable of orange.time+1 to rep 1 unit of time increment . 
+
+iii) Counting the no of fresh oranges 
+Is done meanwhile filling in the rotten oranges in a queue . At the end when no of infected oranges from rotten oranges (agt beginning)== no of fresh oranges then the result is the time taken otherwise if it's not then -1 is returned
+
+iv) Visited Boolean Array 2-D
+to maintain those co-ordinates which have been visited already .
+
+v) Time updation 
+in each call when all neighbours are finally filled the overall time is updated from tm to orange.time (the newly create object's time).
+
+vi) Moving through the grid
+is indeed a point to rmbr for other questions too .
+as that is in combination the element can move up , down , right and left hence it's co-ordinates change from (row+1,col+0) , (row+0,col+1) , (row-1,col+0) and (row+0,col-1) this neccessary traversal to other elements of the grid postulates that another helperrow array and helpercol array has to be made which has such combinations to facilitate in adding up to the current rotten orange's co ordinates.
+int[] dr = { -1, 0, 1, 0 };
+int[] dc = { 0, -1, 0, 1 };
+
+
+
+Overall : Initial challenges included 
+i) checking traversal
+ii) filling up the rotten oranges and counting fresh oranges
+iii)Traverse from bfs in the grid aiming at each rotten oranges by using helperrow and helpercol
+iv) mark the visited co-ordinates true 
+v)at the end check whether the no of rotten oranges == no of fresh oranges , return tm if true lest -1.
