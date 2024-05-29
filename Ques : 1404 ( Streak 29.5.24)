@@ -1,0 +1,70 @@
+Number of Steps to convert a binary String rep of a number to 1
+This question an easy one but await the inner issues with this one , the brute force solution was 
+
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Method : 1
+Converting this String to an array of datatype string using array.split(""). Hence moving further towards converting the array of String to the actual number (let's call it sum) . The sum is later looped in while loop with if conditions of being an even or oddd and thus being operating through.
+This method works perfectly fine until this
+1 <= s.length <= 500 
+as stated the integer primtive datatype can hold upto 32 bits accurately afterwards it just loses precision which happens in this method . 
+You can use the BigInteger but that is inefficient. 
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Method : 2
+The conversion to array is redundant hence skip it directly access the string but after converting it to the string builder notation using
+StringBuilder sb=new StringBuilder(s);
+This is an optimised approach as if it checks whether the last bit is 0 if it is then remove the last bit and if it ain't then operate upon and convert from the last bit into 0 until you come across 0 as carry will be generated when 1 is added so 1101 through this step turns to 1110 . 
+If the looping variable starting from s.length()-1  in String reaches to 0 then convert the first indexed char to 1 as in this case 1111 => 1110 => 1100=> 1000 => 0000  (loop terminates) =>1000 .
+This method proves to be inefficient bcoz of being caught in TLE error .
+
+
+Method : 3 
+_____________________________________________________________________________________________________________________________________________________________________________
+
+**************************************************************************(ALGORITHM)****************************************************************************************
+_____________________________________________________________________________________________________________________________________________________________________________
+You can't make up an algorithm on your own and when it's needed to solve it asap hence I read some discussions and then came to this conclusion , understood it then eventually applied the algo.
+i)The algo combines two steps of dividing in odd number detection and even number detection into one as tht step is common so one step is always incremented in each iteration.
+ii)Then it proceeds to check whether the carry will be generated while moving through the number in String form , if the carry is generated it checks by adding carry which is in starting 0 hence the condition if(s.charAt(i)-'0' + carry ==1) to check whether a carry is generated or not .
+iii) Then if the carry is generated carry is intilaised to 1 for taking upto the next iteration of loop and step is incremented.
+iv)The loop starts at s.length()-1 and goes upto the index 1 as the steps have been combined .
+
+
+| Code Snippet | -------------------------------------------------------------------------------------------------------------------------------------------------------------
+for (int i = s.length() - 1; i > 0; i--) {
+    count++;
+    if (s.charAt(i) - '0' + carry == 1) {
+        carry = 1;
+        count++;
+    }
+}
+return count + carry;
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ s="1101"
+i) i=3 (s.charAt(3)=1)
+count=>1
+if(1+0==1)  (true)
+{
+carry=>1;
+count=>2;
+}
+
+ii) i=2 (s.charAt(2)=0)
+count=>3
+if(0+1==1)  (true)
+{
+carry=>1;
+count=>4;
+}
+
+iii)i=1 (s.charAt(1)=1)
+count=>5
+if(1+1==1) (Not true)
+
+iv)i=0 (i>0 conditon no longer true)
+hence return count +carry ;
+return 5+1 ;
+return 6;
+
+Overall : The solution follows a well-defined algorithmic approach, which is essential for solving problems systematically . Good one to revise for algorithm.
+
+
+
