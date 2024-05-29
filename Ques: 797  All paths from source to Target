@@ -1,0 +1,12 @@
+Afresh start with Graphs Data Structure
+This is a typical question which incorporates traversal through graph either via bfs or dfs , I preferred dfs but the matter of fact is I was acquainted to the dfs traversal or basically graph when the input of graph is in form of Array Of ArrayList , hence squandered away most of my time in thinking about how to access the values which at the end of the slogging I resolved to graph[curr][i] and a for loop . It was just a 2-D array which seemed to be like finding a needle in a haystack but nevertheless that was easy and wouldn't have taken a long time if I was more acquainted to Edge List input {Array of Array} form . 
+Then as the string output of answer when going through all paths to reach a target is different than the Arraylist form because if you keep passing String result in each recursive call , the String result will not keep altering in the previous recursive calls , the same doesn't hold true for passing ArrayList result as it changes even in previous recurive calls hence we have to backtrack that is we have to remove that element once the call for that node is over and popped out of stack so to explore other nodes in the same branch of it's parent node to reach target.
+
+The necessary pre requisites for this question were :
+Depth-First Search (DFS) and Input in form of Edge List
+Backtracking
+Handling Recursive Data Structures:
+List and ArrayList Manipulation:
+Path Tracking:
+Boolean Arrays for Visited Nodes: { not required in this question coz it's given that the graphs are directed ACYCLIC}
+
