@@ -1,0 +1,52 @@
+Ques 89:
+Gray Code 
+Problem Statement : The Gray Code problem states that from 0 to 2ⁿ-1 the numbers must be arranged in such a manner in which the bit change in their binary representation is just 1 bit , where n is provided.
+For eg: n=2
+[0-3]
+Integers are : 0,1,2,3
+The Binary representation will be
+Decimal	Binary
+0	00
+1	01
+2	10
+3	11
+hence if we arrange these binary rep in a tabular where they only change by 1 bit then 
+Decimal  Binary
+0	00
+1	01
+3	11
+2	10
+
+hence output is {0,1,3,2}
+
+Approach : 1
+The Gray Code Theory 
+Gray Code, also known as Gray binary code or reflected binary code, is a binary numeral system where two successive values differ in only one bit. This property makes Gray Code particularly useful in applications where minimizing errors due to noise or reducing the number of bits that change at any one time is crucial. It is one of the core concepts of Digital Design.
+To find a Gray Code of the number manually on pen and paper let's say for eg: 7 
+  Decimal  Binary
+    7	     111
+Apply the Gray Code Conversion Rule:
+Start with the leftmost bit (most significant bit) unchanged.
+Perform XOR operation on each subsequent bit with the bit directly to its left.
+Keep the leftmost bit (1) unchanged.
+XOR Operation:
+Perform XOR operation on the next two bits:
+1⊕1=01⊕1=0
+So, the next bit becomes 0.
+Perform XOR operation on the last two bits:
+1⊕0=11⊕0=1
+So, the last bit remains 1.
+Resulting Gray Code: 101
+
+To change a given Integer in it's gray code value : Xor it with it's right shifted value 
+grey x=x^(x>>1)
+
+The approach proceeds as :
+1)Iterate from 0 to 2ⁿ-1
+2) Keep converting the i (pointer from 0 -> 2ⁿ-1) to it's grey code and add it into the list subsequently .
+return the list in the end.
+
+T.C : O(2ⁿ-1) due to iteration from 0 to 2ⁿ-1.
+S.C : O(2ⁿ) due to storage of these many integers in List.
+
+
