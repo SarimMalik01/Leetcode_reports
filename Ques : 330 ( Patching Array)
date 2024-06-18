@@ -1,0 +1,119 @@
+Ques : 330 
+Patching Array 
+Problem Statement : Given an Array of Integers and another integer n , we have to compute the no. of integers which must be added in the Array such that 
+[1,n] can be formed within the array with it's integer combinations.
+For Eg:
+nums=[1,3]    n=6
+we have to form an array in which the [1-6] can be formed by the combinational sum of integers present in it using integers from nums.
+Integer combination                      Integer which can be formed in range                New Array
+[1]                                                 1                                           [1]
+[2]                                                 2                                           [1,2]
+[3]                                                 3                                           [1,2,3] 
+[1,3]                                               4                                           [1,2,3] 
+[2,3]                                               5                                           [1,2,3] 
+[1,2,3]                                             6                                           [1,2,3] 
+ 
+hence new array is [1,2,3] in which the integer added which wasn't present in original array is 2 , so 1 integer is added .
+
+
+Observation 
+1) We initially iterated from the original Array for it's elements and didn't always add a new element from the original array.
+2) When did we add an integer from the original array : When the elements before the integer in new array were all being formed by combinations inside it.
+ Eg we didn't add 3 just after 1 as then 2 was missing as a combination 
+So we add the element from array when the sum of all the elements present in new array is equal or greater than the integer from original array nums
+To express it more intuitively :
+Case 1: When the sum of integers(reach) in new array is less than the integer(nums[i]) to be added from nums.
+
+                           ____________________________________________________________________________________________________
+                                                   |                                   |
+(numbers till value of     ------------------------>reach                            nums[i]
+ reach can be formed by                            |                                   |
+combinations in reach)                             |                                   | 
+                                                   
+                                                   |                                   |
+If the nums[i] is incurred in reach then :         |                                   |
+                           ____________________________________________________________________________________________________
+                                                   |                                   |                               |
+                           ----------------------- (missing integers which can't be     ----------------------------->reach                                          
+                                                    formed by combination in reach now
+                                                    as reach + nums[i] will skip this
+                                                    interval)
+
+Case 1: When the sum of integers (reach) in the new array is less than the integer (nums[i]) to be added from nums.
+
+
+                           ____________________________________________________________________________________________________
+                                                                  |                                 |
+                                                                nums[i]                           reach
+(numbers till value of     ------------------------------------------------------------------------->
+reach can be formed by                                            |                                 |
+combinations in reach)                                            |                                 | 
+                                                                  |                                 |
+                                                                  |                                 |
+If the nums[i] is incurred in reach then :                        |                                 |
+                           ____________________________________________________________________________________________________
+                                                                  |                                 |                  |
+                           ---------------------------------------|---------------------------------|---------------->reach
+                                                                   (This interval is also covered 
+                                                                    now)  
+So , we observed that the nums[i] must be added only when the reach + 1>= nums[i] otherwise just add the element maximum in the new array after incrementing it .
+
+
+Approach :
+1)Initialization:
+Set a counter count to 0 to keep track of the number of patches added.
+Use an index i to traverse the array nums.
+Initialize reach to 0, representing the farthest integer that can be represented initially (no numbers included yet).
+
+~) the 2,3,4 steps will be looped will the reach < n
+2)Iterate Until Full Coverage:
+Continue the loop while reach is less than n. This loop will ensure that the range [1, n] can eventually be covered.
+
+3)Check Array Elements:
+If i has reached the end of nums or the current element in nums is greater than reach + 1:
+Add reach + 1 to reach, effectively extending the range of representable numbers. This is a patch.
+
+4)Increment the count since a new number was added.
+If nums[i] is less than or equal to reach + 1:
+Add nums[i] to reach, extending the range of representable numbers using the existing number from the array.
+Move to the next element in nums by incrementing i.
+
+5)Return the Result:
+Once the loop completes, count will contain the minimum number of patches needed to cover all integers from 1 to n.
+
+
+Code :
+class Solution {
+    public int minPatches(int[] nums, int n) {
+        int count=0;
+        int i=0;
+        int l=nums.length;
+        long reach=0;
+        while(reach<n)
+        {
+            if(i>=l)
+            {
+                reach+=reach+1;
+                count++;
+            }
+            else if(i<l && nums[i]<=reach+1)
+            {
+                reach+=nums[i];
+                i++;
+            }
+            else
+            {
+                reach+=reach+1;
+                count++;
+            }
+        }
+        return count;
+    }
+}
+
+
+Time Complexity (TC)
+The time complexity is O(m) ,  where m is the length of nums, since the algorithm processes each element of nums once and potentially adds a new patch in constant time.
+
+Space Complexity (SC)
+The space complexity is O(1), as it uses a fixed amount of additional space regardless of the input size.
