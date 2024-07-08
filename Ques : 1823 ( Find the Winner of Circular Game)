@@ -1,0 +1,150 @@
+In the problem, everyone’s taking turns to play ‘You’re Out!’—until only one person is left, confused and wondering if it’s all just a cruel game of musical chairs with one very unlucky seat.
+Intuition 1
+These Kinda questions are the Simulation Question where the Algorithm one comes up with has to simulate or mimic the process step by step .
+
+So , Think about it in step by step process then convert that into form of code.
+
+Basically , at first glance this question will give an idea of using some kind of Data Structure for maintaining how people are being removed from table .
+
+1)Array : Might go well but will be a lot more hefty to implement because the people which are being eliminated will never leave the table but will become non participant as those who are being eliminated will be marked 0 consequentally hence counting next people will be confusing .
+2) Queue : Helps in such case where people are removed as dynamically they will be removed too , but for my preference I used ArrayList as the first approach to identify the people who will be removed not just from ends but from between the extremus.
+
+Approach 1
+Maintain an ArrayList where you will fill n elements reperesenting people who will play the game.
+Simulate the Process for a count of n-1 times where count is referring to people getting removed in each iteration.
+Find which person will be removed as it will be i+k-1 , k indiviuals ahead of current person i and -1 because the person at i also being counted.
+Once removed then update i as now it will be one ahead of removed person but as the list size has changed and has become list.size()-1 hence i=z and not i=z+1.
+When only one element is left , count == n-1 ( n= total no. of people who played the game).
+Screenshot 2024-07-08 123749.png
+
+Complexity
+Time complexity: O(n*k) :
+because we are iterating through the list of size n and removing elements in each iteration until only one element remains.
+Space complexity: O(n) :
+because we are storing the list of size n in memory.
+Code
+class Solution {
+    public int findTheWinner(int n, int k) {
+        ArrayList<Integer> list=new ArrayList();
+        for(int x=1;x<=n;x++) {
+            list.add(x);
+        }
+        int l=list.size();
+
+       
+        int i = 0;
+
+        while (list.size()!=1) {
+           
+            l=list.size();
+            int z = (i + k - 1 ) % l;
+            System.out.println(list +"     "+i+"      "+z);
+            list.remove(z);
+            i=z%l;
+
+        }
+        return list.get(0);
+    }
+}
+Intution 2
+The iterative solution in Approach 1 can be converted into recursive for optmising Time Complexity .
+Each time we are updating parameters i and z for removing elements hence which can be done recursively too by passing the List.
+
+Approach 2
+Maintain an ArrayList where you will fill n elements reperesenting people who will play the game.
+Pass the List in helper function with n , k and current person 0.
+In each recursive call the person at (i+k-1)%n is removed from list.
+Next Recursive calls subsequently have parameters list , list.size(),k,(i+k-1)%n.
+Base Case : when n==1 then return list.get(0).
+Screenshot 2024-07-08 123840.png
+
+Complexity
+Time complexity: O(n) :
+because we are recursively each element only once.
+Space complexity: O(n) :
+because we are storing the list of size n in memory.
+Code
+class Solution {
+    public int findTheWinner(int n, int k) {
+        ArrayList<Integer> list=new ArrayList();
+        for(int x=1;x<=n;x++) {
+            list.add(x);
+        }
+        int l=list.size();
+        return helper(list,n,k,0);
+    }
+
+    public static int helper(ArrayList<Integer> list,int n,int k,int i)
+    {
+        if(list.size()==1)
+        {
+            return list.get(0);
+        }
+
+        list.remove((i+k-1)%n);
+
+        return helper(list,list.size(),k,(i+k-1)%n);
+    }
+
+}
+Intution 3
+Once successfully implemented the above Approach 1 and 2, the Intution for optimising it will be far more comprehensible .
+The List is iterated for n*k times as till the count is not satisified hence Recursion for this problem can be possible as we have to run the process after reaching the end of circular list.
+
+Hence , Recursion can be be given a shot .
+How to know which Recursion ?
+Soln: The Recursion can be segregated in 2 types
+
+Choices and Decisions
+Inductive Based Hypothesis (IBH)
+As we don't have choices here and have to just simulate the process so IBH will be used :
+
+IBH Analysis
+
+Base Case (B):
+Condition: If there is only 1 person (n == 1).
+Explanation: When there's only one person left, they are at position 0.
+Implementation: return 0;
+
+if (n == 1) {
+    return 0; // The only person is the winner, position 0 in zero-indexing.
+}
+Induction Hypothesis (H):
+Assumption: Assume that the function correctly computes the winner for
+n−1 people.
+Purpose: This hypothesis is used to build the solution for n people based on the solution for n−1 people.
+Logic: If we know the winner's position for n−1 people, we can compute the position for n people.
+
+int winnerPositionForNMinus1 = helper(n - 1, k); // Hypothesis
+Induction (I):
+Step: Use the hypothesis to find the solution for n people
+Explanation: If the winner's position for n-1 people is known, the position for n people can be calculated by adjusting for the next elimination round for (winnerPositionForNMinus1+k).
+Implementation: Compute the position of the winner considering the next elimination step and the circular nature of the problem.
+
+return (winnerPositionForNMinus1 + k) % n; // Inductive step
+Approach 3
+The list has been discarded as the bigger problem is decomposed into smaller problems where base case will add up for bigger problems further.
+The smaller problems will eventually return their results to bigger problem call which will finally condense into our answer .
+Screenshot 2024-07-08 123910.png
+
+Complexity
+Time complexity: O(n) :
+because we are recursively each element only once.
+Space complexity: O(1) :
+Code
+class Solution {
+    public int findTheWinner(int n, int k) {
+        return helper(n,k)+1;
+    }
+
+    public static int helper(int n,int k)
+    {
+        if(n==1)
+        {
+            return 0;
+        }
+
+        return (helper(n-1,k)+k)%n;
+    }
+
+}
