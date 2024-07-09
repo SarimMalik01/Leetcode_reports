@@ -1,0 +1,152 @@
+Why did the house robber skip every other house? He wanted to ensure his crime spree had a healthy work-life balance!
+
+# Intuition
+<!-- Describe your first thoughts on how to solve this problem. -->
+**The question clearly states that we have to pick certain elements for finding out the greatest sum .**
+Hence going by the approach of picking and unpicking certain elements of the Array in recursion.
+The intution for the first recursion without DP techniques leads to unruling Time Limit hence after modifying solution using three approaches :
+1. Memoisation
+2. Tabulation
+3. Space Optimised
+ 
+the solution is excellent at 3rd stage after space optimisation.
+# Approach
+1. Memoisation
+   1. Recognise that normal recursion doesn't work here because of the subsequent calls being made for same indices , Hence the results of those calls can be stored in another array to save on Time Complexity.
+   2. Initliase an array (dp) and fill it with -1.
+   3. Pass it as argument in the helper function which is being recursively called.
+   4. Check whether the dp at current index stores -1 if that is true then evaluate the result by picking and unpicking elements and store at index in dp array 
+   5. If dp at current index doesn't hold -1 then return the result stored at the current index in dp .
+
+Hence , you saved on Time Complexity by sacrificing a little on Space Complexity .
+
+![Screenshot 2024-07-09 095232.png](https://assets.leetcode.com/users/images/a1fe9f84-0fcc-4e2b-ad08-d1f204d2cc58_1720498964.5893247.png)
+
+
+# Complexity
+- Time complexity: O(n) + Recursive call stacks .
+
+- Space complexity: O(n) , due to stroring the results in dp array which has size of n.
+<!-- Add your space complexity here, e.g. $$O(n)$$ -->
+
+# Code
+```
+class Solution {
+    public int rob(int[] nums) {
+        int index=nums.length-1;
+        int[] dp=new int[nums.length];
+        Arrays.fill(dp,-1);
+        return (helper(nums,index,dp));
+        
+    }
+    public static int helper(int[] houses,int index,int[] dp)
+    {
+       if(index==0)
+       {
+           return houses[index];
+       }
+       if(index<0)
+       {
+           return 0;
+       }
+       if(dp[index]!=-1)
+       {
+           return dp[index];
+       }
+       int pick=houses[index]+helper(houses,index-2,dp);
+       int unpick=0+helper(houses,index-1,dp);
+       return dp[index]=Math.max(pick,unpick);
+
+    }
+}
+```
+---
+2. Tabulation
+   1. Recognise that Memoisation can be improved as the recursive call stacks ain't neccessary here , Hence the results of those recurisve calls can be achieved in iterative steps too.
+   2. **Initliase an array (dp) and initialise the dp[0]=nums[0] and dp[1]=Maths.max(nums[0],nums[1]) because when you have only 2 elements in nums (2 houses only you can rob either of them ) you will have the option to only pick one and that should be maximum.**
+   3. The loop starts for index 2 till the length of the dp array with concurrent picking and unpicking method . 
+   4. **You pick the current index's value in nums and add the value of the element in dp array which is at current index-2 & unpick the current index's value in nums and add the value of that element in dp array which is at current index-1**
+   4. When loop ends simply return the value stored at last index in the dp array.
+
+Hence , you saved on Time Complexity by reducing the recursive stack calls .
+
+![Screenshot 2024-07-09 100136.png](https://assets.leetcode.com/users/images/ab0f41c0-5e4e-4c77-8691-0f3a27f9b7e1_1720499507.5443776.png)
+
+# Complexity
+- Time complexity: O(n) .
+
+- Space complexity: O(n) , due to stroring the results in dp array which has size of n.
+<!-- Add your space complexity here, e.g. $$O(n)$$ -->
+
+# Code
+```
+class Solution {
+    public int rob(int[] nums) {
+        if(nums.length==1)
+        {
+            return nums[0];
+        }
+        int[] dp=new int[nums.length];
+        dp[0]=nums[0];
+        dp[1]= Math.max(nums[0], nums[1]);
+        for(int i=2;i<nums.length;i++)
+        {
+            int pick=nums[i]+dp[i-2];
+            int unpick=0+dp[i-1];
+            dp[i]=Math.max(pick,unpick);
+        }
+       return (dp[nums.length-1]);
+
+    }
+}
+```
+
+---
+
+3. Tabulation + Space optimised
+   1. Recognise that only Tabulation can be improved as the dp array maintainance ain't neccessary here , Hence the results stored in dp array can be achieved after the loop ends in another pointer.
+   2. **Initliase 2 varaibles which will be pointers in loop and initialise the prev1 =nums[0] and prev 2 =Maths.max(nums[0],nums[1]) because when you have only 2 elements in nums (2 houses only you can rob either of them ) you will have the option to only pick one and that should be maximum.**
+   3. The loop starts from i= 2 till the length of the dp array with concurrent picking and unpicking method . 
+   4. **You pick the current index's value in nums and add the value in prev 2  & unpick the current index's value in nums and add the prev 1**
+   5. Store the max of pick and unpick in another varaible curri
+   5. Move the pointers forward for next iteration in loop by moving    
+   prev2 -> prev 1 
+   prev1-> curri
+   4. When loop ends simply return the value stored at prev1.
+
+Hence , you saved on Space Complexity by reducing on dp array.
+
+![Screenshot 2024-07-09 100808.png](https://assets.leetcode.com/users/images/d1bafde3-ba45-4d7b-89d8-7476795f9d1d_1720499901.6249652.png)
+
+# Complexity
+- Time complexity: O(n) .
+
+- Space complexity: O(1) 
+<!-- Add your space complexity here, e.g. $$O(n)$$ -->
+
+# Code
+```
+class Solution {
+    public int rob(int[] nums) {
+        if(nums.length==1)
+        {
+            return nums[0];
+        }
+        int[] houses=nums;
+       int prev2 =houses[0];
+       int prev1= Math.max(houses[0], houses[1]);
+        for(int i=2;i<houses.length;i++)
+        {
+            int pick=houses[i]+prev2;
+            int unpick=0+prev1;
+            int curri=Math.max(pick,unpick);
+            prev2=prev1;
+            prev1=curri;
+        }
+       return (prev1);
+
+    }
+}
+```
+
+
